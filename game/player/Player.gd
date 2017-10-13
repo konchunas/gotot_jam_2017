@@ -13,6 +13,8 @@ export var sliding_power = 200
 var last_collide_time = 0
 var idle_time = 0
 var prev_pos = Vector2()
+# var local_collision_pos = Vector2()
+var should_stick = false
 
 var glazing_trail_particle = "../follower/glazing_trail"
 
@@ -22,12 +24,27 @@ func _ready():
 	initial_gravity_scale = get_gravity_scale()
 	initial_pos = get_pos()
 
+func _integrate_forces( state ):
+	var face = get_node("../follower")
+	if not should_stick:
+		var i = 0
+		while i < state.get_contact_count():  #this check is needed or it will throw errors 			
+			var angle = face.get_angle_to(state.get_contact_local_pos(i))
+			print(angle)
+			if angle > 1.5 : 
+				should_stick = true
+			i += 1
+
+
 func _fixed_process(delta):
+	
+	if not Input.is_action_pressed("ui_select"):
+		should_stick = false
 	
 	var v = get_linear_velocity()
 	var pos_diff = (prev_pos - get_pos()).abs()
 	
-	if pos_diff.x < 0.5 and pos_diff.y < 0.5:
+	if pos_diff.x < 0.5 and pos_diff.y < 0.5 and not should_stick:
 		idle_time += delta
 	else:
 		idle_time = 0
@@ -35,10 +52,11 @@ func _fixed_process(delta):
 	# idle death after 1 sec
 	if idle_time > 1:
 		_die()
-	
-	# falling death
-	if (OS.get_ticks_msec() - last_collide_time > 2000 and v.y > 0 && abs(v.y) > abs(v.x)*2.0):
+		print("idle die")	
+		# falling death
+	if (last_collide_time > 0 and OS.get_ticks_msec() - last_collide_time > 1000 and v.y > 2000 and abs(v.y) > abs(v.x)*2.0):
 		_die()
+		print("falling die ", v.y)
 		
 	prev_pos = get_pos()
 	pass
@@ -58,6 +76,9 @@ func _die():
 	set_linear_velocity(Vector2(0, 0))
 	set_angular_velocity(0)
 	set_pos(initial_pos)
+	idle_time = 0
+	last_collide_time = 0
+	print("die")
 
 func _on_body_enter( body ):
 	
@@ -70,7 +91,7 @@ func _on_body_enter( body ):
 		body.on_player_collide(self)
 
 	if Input.is_action_pressed("ui_select"):
-		if body.is_in_group("ceiling"):
+		if body.is_in_group("ceiling") or should_stick:
 			previousLinearVelocity = get_linear_velocity()
 			previousAngularVelocity = get_angular_velocity()
 			set_linear_velocity(Vector2(0, 0))
@@ -87,7 +108,8 @@ func _on_body_enter( body ):
 			on_hit_ceiling(body)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
-			
+	
+	
 	
 
 func on_hit_ceiling(ceiling):

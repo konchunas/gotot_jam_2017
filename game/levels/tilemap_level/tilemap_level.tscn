@@ -10,7 +10,7 @@
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-transform/pos = Vector2( 303, 145 )
+transform/pos = Vector2( 73.8849, -136.872 )
 
 [node name="bump_particles" type="Particles2D" parent="."]
 
@@ -75,7 +75,7 @@ region_rect = Rect2( 0, 0, 8000, 8000 )
 
 [node name="TileMap" type="TileMap" parent="."]
 
-transform/pos = Vector2( 10, 100 )
+transform/pos = Vector2( 13.0147, 100 )
 transform/rot = -30.0
 mode = 0
 tile_set = ExtResource( 4 )
