@@ -12,7 +12,6 @@ func _fixed_process(delta):
 	var pos = get_pos()
 	var size = get_node("spike").get_item_rect().size * get_node("spike").get_scale()
 	set_pos(Vector2(orig_pos.x, orig_pos.y+size.y*d))
-	print(size.y)
 
 
 func _ready():

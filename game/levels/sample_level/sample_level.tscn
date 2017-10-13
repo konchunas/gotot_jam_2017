@@ -144,7 +144,6 @@ transform/pos = Vector2( 3187, 1753 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -161,26 +160,19 @@ scroll/ignore_camera_zoom = false
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
-transform/pos = Vector2( 3772.64, 2655.22 )
+transform/pos = Vector2( 3774.04, 2649.25 )
 texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 8000, 8000 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Laser" parent="." instance=ExtResource( 9 )]
 
 editor/display_folded = true
-transform/pos = Vector2( 3157.08, 2259.71 )
+transform/pos = Vector2( 3243.96, 2262.57 )
 transform/rot = -37.0
-transform/scale = Vector2( 1.14221, 7.42805 )
 
 [node name="animation" parent="Laser"]
 

@@ -60,7 +60,7 @@ func _on_body_enter( body ):
 			set_gravity_scale(0.0)
 			on_hit_ceiling(body)
 		else:
-			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
+			apply_impulse(Vector2(0,0), Vector2(jump_power / 2, -jump_power * get_gravity_scale() ))
 
 func on_hit_ceiling(ceiling):
 	var bump_particles = get_node("../follower/ceil_bump_particles")
