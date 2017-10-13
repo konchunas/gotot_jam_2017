@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/black1x1.png" type="Texture" id=2]
-[ext_resource path="res://floor/floor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=4]
-[ext_resource path="res://obstacle/spike/moving_spike.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ceiling/ceiling.tscn" type="PackedScene" id=6]
-[ext_resource path="res://levels/sample_level/bg1.png" type="Texture" id=7]
+[ext_resource path="res://obstacle/slime/slime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://floor/floor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obstacle/spike/moving_spike.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ceiling/ceiling.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/sample_level/bg1.png" type="Texture" id=8]
 
 [node name="Level" type="Node2D"]
 
@@ -46,69 +47,90 @@ color/color = Color( 1, 0.175781, 0.639404, 1 )
 
 [node name="FLOOR" type="Node" parent="."]
 
-[node name="floor" parent="FLOOR" instance=ExtResource( 3 )]
+[node name="slime" parent="FLOOR" instance=ExtResource( 3 )]
 
-[node name="floor1" parent="FLOOR" instance=ExtResource( 3 )]
+transform/pos = Vector2( 574.153, 668.478 )
 
+[node name="floor" parent="FLOOR" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 270.993, 289.1 )
+
+[node name="floor1" parent="FLOOR" instance=ExtResource( 4 )]
+
+editor/display_folded = true
 transform/pos = Vector2( 907, 773 )
 
-[node name="obstacle" parent="FLOOR/floor1" instance=ExtResource( 4 )]
+[node name="obstacle" parent="FLOOR/floor1" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 163.3, -48.2215 )
 
-[node name="obstacle 2" parent="FLOOR/floor1" instance=ExtResource( 4 )]
+[node name="obstacle 2" parent="FLOOR/floor1" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 191.095, -47.529 )
+transform/pos = Vector2( 192.748, -48.7419 )
 
-[node name="moving_spike" parent="FLOOR/floor1" instance=ExtResource( 5 )]
+[node name="moving_spike" parent="FLOOR/floor1" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( -4.42004, -47.6217 )
 
-[node name="floor2" parent="FLOOR" instance=ExtResource( 3 )]
+[node name="moving_spike1" parent="FLOOR/floor1" instance=ExtResource( 6 )]
 
+transform/pos = Vector2( 544.801, -481.088 )
+transform/rot = 181.51
+
+[node name="moving_spike2" parent="FLOOR/floor1" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 384.954, 15.1287 )
+transform/rot = 91.5086
+
+[node name="floor2" parent="FLOOR" instance=ExtResource( 4 )]
+
+editor/display_folded = true
 transform/pos = Vector2( 1447, 1163 )
 
-[node name="obstacle" parent="FLOOR/floor2" instance=ExtResource( 4 )]
+[node name="obstacle" parent="FLOOR/floor2" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 163.3, -48.2215 )
 
-[node name="obstacle 2" parent="FLOOR/floor2" instance=ExtResource( 4 )]
+[node name="obstacle 2" parent="FLOOR/floor2" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 191.095, -47.529 )
 
-[node name="floor3" parent="FLOOR" instance=ExtResource( 3 )]
+[node name="floor3" parent="FLOOR" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 2767, 2133 )
 
-[node name="obstacle" parent="FLOOR/floor3" instance=ExtResource( 4 )]
+[node name="obstacle" parent="FLOOR/floor3" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 163.3, -48.2215 )
 
-[node name="obstacle 2" parent="FLOOR/floor3" instance=ExtResource( 4 )]
+[node name="obstacle 2" parent="FLOOR/floor3" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 191.095, -47.529 )
 
-[node name="floor4" parent="FLOOR" instance=ExtResource( 3 )]
+[node name="floor4" parent="FLOOR" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 1967, 1543 )
 
-[node name="obstacle" parent="FLOOR/floor4" instance=ExtResource( 4 )]
+[node name="obstacle" parent="FLOOR/floor4" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 163.3, -48.2215 )
 
-[node name="obstacle 2" parent="FLOOR/floor4" instance=ExtResource( 4 )]
+[node name="obstacle 2" parent="FLOOR/floor4" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 191.095, -47.529 )
 
-[node name="floor5" parent="FLOOR" instance=ExtResource( 3 )]
+[node name="floor5" parent="FLOOR" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 2377, 1843 )
 
-[node name="obstacle" parent="FLOOR/floor5" instance=ExtResource( 4 )]
+[node name="obstacle" parent="FLOOR/floor5" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 163.3, -48.2215 )
 
-[node name="obstacle 2" parent="FLOOR/floor5" instance=ExtResource( 4 )]
+[node name="obstacle 2" parent="FLOOR/floor5" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 191.095, -47.529 )
 
@@ -116,31 +138,31 @@ transform/pos = Vector2( 191.095, -47.529 )
 
 editor/display_folded = true
 
-[node name="ceiling" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 827, 33 )
 
-[node name="ceiling1" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling1" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1207, 313 )
 
-[node name="ceiling2" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling2" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1597, 603 )
 
-[node name="ceiling3" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling3" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1987, 883 )
 
-[node name="ceiling4" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling4" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2387, 1173 )
 
-[node name="ceiling5" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling5" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2787, 1463 )
 
-[node name="ceiling6" parent="CEILING" instance=ExtResource( 6 )]
+[node name="ceiling6" parent="CEILING" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3187, 1753 )
 
@@ -171,7 +193,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
 transform/pos = Vector2( 3767.06, 2655.22 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 8000, 8000 )
 __meta__ = {
@@ -179,4 +201,3 @@ __meta__ = {
 }
 
 
-[editable path="Player"]
