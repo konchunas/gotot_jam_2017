@@ -12,6 +12,7 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 transform/pos = Vector2( 303, 145 )
+bump_particles_path = null
 
 [node name="FLOOR" type="Node" parent="."]
 
@@ -29,7 +30,9 @@ transform/pos = Vector2( 163.3, -48.2215 )
 
 transform/pos = Vector2( 191.095, -47.529 )
 
-[node name="spike" parent="FLOOR/floor1" instance=ExtResource( 4 )]
+[node name="moving_spike" parent="FLOOR/floor1" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -99.9396, -46.9724 )
 
 [node name="floor2" parent="FLOOR" instance=ExtResource( 2 )]
 
@@ -113,6 +116,7 @@ transform/pos = Vector2( 3187, 1753 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
