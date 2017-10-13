@@ -20,9 +20,10 @@ func _fixed_process(delta):
 		 
 func _input(event):
 	if event.is_action_released("ui_select"):
-		set_gravity_scale(initial_gravity_scale)
-		set_linear_velocity(previousLinearVelocity)
-		set_angular_velocity(previousAngularVelocity)
+		if get_gravity_scale() == 0.0:		# if we were touching ceiling and released space than continue moving
+			set_gravity_scale(initial_gravity_scale)
+			set_linear_velocity(previousLinearVelocity)
+			set_angular_velocity(previousAngularVelocity)
 
 func _die():
 	set_linear_velocity(Vector2(0, 0))
@@ -37,9 +38,10 @@ func _on_body_enter( body ):
 	if Input.is_action_pressed("ui_select"):
 		if body.is_in_group("ceiling"):
 			previousLinearVelocity = get_linear_velocity()
-			set_linear_velocity(Vector2(0, 0))
 			previousAngularVelocity = get_angular_velocity()
+			set_linear_velocity(Vector2(0, 0))
 			set_angular_velocity(0)
+
 			set_gravity_scale(0.0)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -700))
