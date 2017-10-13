@@ -23,6 +23,7 @@ polygon = Vector2Array( 0.0568161, -132.655, 50.5969, -121.825, 100.436, -95.957
 
 [node name="Player" type="RigidBody2D" parent="."]
 
+editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -50,6 +51,7 @@ sliding_power = 200
 
 [node name="circle" type="Sprite" parent="Player"]
 
+editor/display_folded = true
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player/circle"]
@@ -102,6 +104,7 @@ config/pitch_random = 0.0
 
 [node name="follower" type="Node2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 0.210762, 0 )
 script/script = ExtResource( 5 )
 target_path = NodePath("../Player")
