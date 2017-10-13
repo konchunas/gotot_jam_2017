@@ -1,18 +1,20 @@
 extends "Obstacle.gd"
 
 # Member variables
-export var motion = Vector2()
-export var cycle = 1.0
+export var speed = 0.4
 var accum = 0.0
+var orig_pos
 
 func _fixed_process(delta):
-	accum += delta*(1.0/cycle)*PI*2.0
+	accum += speed*delta*PI*2.0
 	accum = fmod(accum, PI*2.0)
-	var d = sin(accum)
-	var xf = Matrix32()
-	xf[1]= motion*d 
-	set_transform(xf)
-
+	var d = (1.0+sin(accum))*0.5
+	var pos = get_pos()
+	var size = get_node("spike").get_item_rect().size
+	set_pos(Vector2(orig_pos.x, orig_pos.y+size.y*d))
+	print(d)
+	pass
 
 func _ready():
+	orig_pos = get_pos()
 	set_fixed_process(true)
