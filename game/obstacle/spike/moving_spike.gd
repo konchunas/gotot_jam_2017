@@ -1,4 +1,4 @@
-extends "Obstacle.gd"
+extends "../Obstacle.gd"
 
 # Member variables
 export var speed = 0.4
