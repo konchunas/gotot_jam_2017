@@ -58,15 +58,15 @@ autoplay = ""
 
 [node name="laser_random_timer" type="Timer" parent="."]
 
-process_mode = 0
+process_mode = 1
 wait_time = 30.0
-one_shot = true
+one_shot = false
 autostart = true
 script/script = ExtResource( 5 )
 
 [node name="laser_timeout_timer" type="Timer" parent="."]
 
-process_mode = 0
+process_mode = 1
 wait_time = 3.0
 one_shot = false
 autostart = false
