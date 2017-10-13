@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://floor/floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ceiling/ceiling.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 303, 145 )
+
+[node name="FLOOR" type="Node" parent="."]
+
+editor/display_folded = true
+
+[node name="floor" parent="FLOOR" instance=ExtResource( 2 )]
+
+[node name="floor1" parent="FLOOR" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 907, 773 )
+
+[node name="obstacle" parent="FLOOR/floor1" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 163.3, -48.2215 )
+
+[node name="obstacle 2" parent="FLOOR/floor1" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 191.095, -47.529 )
+
+[node name="floor2" parent="FLOOR" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 1447, 1163 )
+
+[node name="obstacle" parent="FLOOR/floor2" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 163.3, -48.2215 )
+
+[node name="obstacle 2" parent="FLOOR/floor2" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 191.095, -47.529 )
+
+[node name="floor3" parent="FLOOR" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 2767, 2133 )
+
+[node name="obstacle" parent="FLOOR/floor3" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 163.3, -48.2215 )
+
+[node name="obstacle 2" parent="FLOOR/floor3" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 191.095, -47.529 )
+
+[node name="floor4" parent="FLOOR" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 1967, 1543 )
+
+[node name="obstacle" parent="FLOOR/floor4" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 163.3, -48.2215 )
+
+[node name="obstacle 2" parent="FLOOR/floor4" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 191.095, -47.529 )
+
+[node name="floor5" parent="FLOOR" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 2377, 1843 )
+
+[node name="obstacle" parent="FLOOR/floor5" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 163.3, -48.2215 )
+
+[node name="obstacle 2" parent="FLOOR/floor5" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 191.095, -47.529 )
+
+[node name="CEILING" type="Node" parent="."]
+
+[node name="ceiling" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 827, 33 )
+
+[node name="ceiling1" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1207, 313 )
+
+[node name="ceiling2" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1597, 603 )
+
+[node name="ceiling3" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1987, 883 )
+
+[node name="ceiling4" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2387, 1173 )
+
+[node name="ceiling5" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2787, 1463 )
+
+[node name="ceiling6" parent="CEILING" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 3187, 1753 )
+
+
