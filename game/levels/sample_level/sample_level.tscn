@@ -115,7 +115,6 @@ transform/pos = Vector2( 3187, 1753 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -133,18 +132,15 @@ motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 0 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
-transform/pos = Vector2( 3767.06, 2655.22 )
+transform/pos = Vector2( 2662.97, 1766.23 )
+transform/scale = Vector2( 0.733627, 0.459528 )
 texture = ExtResource( 6 )
 region = true
 region_rect = Rect2( 0, 0, 8000, 8000 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 

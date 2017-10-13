@@ -55,3 +55,4 @@ func on_hit_ceiling(ceiling):
 	var bump_particles = get_node("../follower/ceil_bump_particles")
 	bump_particles.set_rot(ceiling.get_rot())
 	bump_particles.set_emitting(true)
+	get_node("wiggling_anim").play("wiggling")
