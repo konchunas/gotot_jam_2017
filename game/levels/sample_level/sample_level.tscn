@@ -12,8 +12,6 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 transform/pos = Vector2( 303, 145 )
-jump_power = 100
-bump_particles_path = NodePath("../bump_particles")
 
 [node name="bump_particles" type="Particles2D" parent="."]
 
@@ -46,8 +44,6 @@ randomness/linear_velocity = -2.23517e-08
 color/color = Color( 1, 0.175781, 0.639404, 1 )
 
 [node name="FLOOR" type="Node" parent="."]
-
-editor/display_folded = true
 
 [node name="floor" parent="FLOOR" instance=ExtResource( 3 )]
 
@@ -183,3 +179,4 @@ __meta__ = {
 }
 
 
+[editable path="Player"]
