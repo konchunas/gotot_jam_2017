@@ -10,10 +10,10 @@ func _fixed_process(delta):
 	accum = fmod(accum, PI*2.0)
 	var d = (1.0+sin(accum))*0.5
 	var pos = get_pos()
-	var size = get_node("spike").get_item_rect().size
+	var size = get_node("spike").get_item_rect().size * get_node("spike").get_scale()
 	set_pos(Vector2(orig_pos.x, orig_pos.y+size.y*d))
-	print(d)
-	pass
+	print(size.y)
+
 
 func _ready():
 	orig_pos = get_pos()
