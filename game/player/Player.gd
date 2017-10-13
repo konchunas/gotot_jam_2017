@@ -9,8 +9,7 @@ var initial_pos = Vector2()
 var previousLinearVelocity = Vector2()
 var previousAngularVelocity = 0.0
 export var jump_power = 70
-
-export(NodePath) var bump_particles_path
+export var sliding_power = 200
 
 func _ready():
 	set_fixed_process(true)
@@ -45,8 +44,14 @@ func _on_body_enter( body ):
 			set_linear_velocity(Vector2(0, 0))
 			set_angular_velocity(0)
 
+			var slidingImpulse = Vector2()
+			slidingImpulse.x = sliding_power
+			slidingImpulse = slidingImpulse.rotated(body.get_rot())
+			apply_impulse(Vector2(0,0), slidingImpulse)
+			set_linear_damp(0.9)
+			
+
 			set_gravity_scale(0.0)
-			# body
 			on_hit_ceiling(body)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
@@ -55,4 +60,10 @@ func on_hit_ceiling(ceiling):
 	var bump_particles = get_node("../follower/ceil_bump_particles")
 	bump_particles.set_rot(ceiling.get_rot())
 	bump_particles.set_emitting(true)
+	emit_rotated_particle("../follower/glazing_trail", ceiling.get_rot())
 	get_node("wiggling_anim").play("wiggling")
+	
+func emit_rotated_particle(nodePath, angle):
+	var particles = get_node(nodePath)
+	particles.set_rot(angle)
+	particles.set_emitting(true)
