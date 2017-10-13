@@ -16,9 +16,6 @@ func _ready():
 	initial_pos = get_pos()
 
 func _fixed_process(delta):
-	# if not Input.is_action_pressed("ui_select"):
-	# 	if old_gravity_scale != 0.0:
-	# 		set_gravity_scale(old_gravity_scale)
 	pass
 		 
 func _input(event):
