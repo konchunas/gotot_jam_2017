@@ -25,6 +25,8 @@ func _input(event):
 		set_angular_velocity(previousAngularVelocity)
 
 func _die():
+	set_linear_velocity(Vector2(0, 0))
+	set_angular_velocity(0)
 	set_pos(initial_pos)
 
 func _on_body_enter( body ):
