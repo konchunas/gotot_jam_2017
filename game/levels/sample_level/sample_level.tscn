@@ -12,7 +12,6 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 transform/pos = Vector2( 303, 145 )
-bump_particles_path = null
 
 [node name="FLOOR" type="Node" parent="."]
 
@@ -142,7 +141,6 @@ __meta__ = {
 
 transform/pos = Vector2( 3767.06, 2655.22 )
 texture = ExtResource( 6 )
-modulate = Color( 0.8311, 0.931457, 0.980469, 1 )
 region = true
 region_rect = Rect2( 0, 0, 8000, 8000 )
 __meta__ = {
