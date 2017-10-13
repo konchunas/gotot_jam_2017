@@ -5,7 +5,6 @@
 
 [node name="moving_spike" instance=ExtResource( 1 )]
 
-editor/display_folded = false
 script/script = ExtResource( 2 )
 speed = 0.4
 
