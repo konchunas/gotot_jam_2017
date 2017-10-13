@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
@@ -12,6 +12,12 @@
 
 custom_solver_bias = 0.0
 radius = 131.979
+
+[sub_resource type="OccluderPolygon2D" id=2]
+
+closed = true
+cull_mode = 2
+polygon = Vector2Array( 0.0568161, -132.655, 50.5969, -121.825, 100.436, -95.9574, 129.245, -37.2318, 131.461, -1.77481, 122.597, 55.8427, 89.3557, 110.136, 29.8394, 129.07, -29.7257, 129.07, -92.9008, 99.2878, -122.278, 61.3829, -134.416, -0.889923, -123.386, -54.9603, -86.8211, -105.93, -48.0401, -123.658 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -40,7 +46,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-jump_power = 100
+jump_power = 90
 sliding_power = 200
 
 [node name="circle" type="Sprite" parent="Player"]
@@ -106,6 +112,9 @@ target_path = NodePath("../Player")
 [node name="face" type="Sprite" parent="follower"]
 
 texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ceil_bump_particles" type="Particles2D" parent="follower"]
 
@@ -137,10 +146,13 @@ params/anim_initial_pos = 0.0
 randomness/linear_velocity = -2.23517e-08
 randomness/hue_variation = 1.0
 color/color = Color( 1, 0.519531, 0.654663, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="glazing_trail" type="Particles2D" parent="follower"]
 
-transform/pos = Vector2( 22.7861, -136.78 )
+transform/pos = Vector2( 47.3928, -114.224 )
 transform/scale = Vector2( 10, 10 )
 config/amount = 18
 config/lifetime = 2.0
@@ -166,6 +178,14 @@ params/anim_speed_scale = 0.0
 params/anim_initial_pos = 0.0
 randomness/linear_velocity = -2.23517e-08
 color/color = Color( 1, 0.977604, 0.867188, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="follower"]
+
+occluder = SubResource( 2 )
+light_mask = 1
 
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]
 
