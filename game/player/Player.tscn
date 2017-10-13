@@ -38,8 +38,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-jump_power = 85
-bump_particles_path = null
+jump_power = 100
 
 [node name="circle" type="Sprite" parent="Player"]
 
@@ -126,6 +125,35 @@ params/anim_initial_pos = 0.0
 randomness/linear_velocity = -2.23517e-08
 randomness/hue_variation = 1.0
 color/color = Color( 1, 0.519531, 0.654663, 1 )
+
+[node name="glazing_trail" type="Particles2D" parent="follower"]
+
+transform/pos = Vector2( 22.7861, -136.78 )
+transform/scale = Vector2( 10, 10 )
+config/amount = 18
+config/lifetime = 2.0
+config/emit_timeout = 2.0
+config/emitting = false
+config/process_mode = 1
+config/texture = ExtResource( 6 )
+params/direction = 270.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 20.0
+params/initial_angle = 0.0
+params/initial_size = 3.0
+params/final_size = 0.5
+params/hue_variation = 0.0
+params/anim_speed_scale = 0.0
+params/anim_initial_pos = 0.0
+randomness/linear_velocity = -2.23517e-08
+color/color = Color( 1, 0.977604, 0.867188, 1 )
 
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]
 
