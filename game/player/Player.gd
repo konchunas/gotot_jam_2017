@@ -11,6 +11,8 @@ var previousAngularVelocity = 0.0
 export var jump_power = 70
 export var sliding_power = 200
 
+var glazing_trail_particle = "../follower/glazing_trail"
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
@@ -26,6 +28,10 @@ func _input(event):
 			set_gravity_scale(initial_gravity_scale)
 			set_linear_velocity(previousLinearVelocity)
 			set_angular_velocity(previousAngularVelocity)
+			get_node(glazing_trail_particle).set_emitting(false)
+
+func death_by_lazer():
+	_die()
 
 func _die():
 	set_linear_velocity(Vector2(0, 0))
@@ -60,7 +66,7 @@ func on_hit_ceiling(ceiling):
 	var bump_particles = get_node("../follower/ceil_bump_particles")
 	bump_particles.set_rot(ceiling.get_rot())
 	bump_particles.set_emitting(true)
-	emit_rotated_particle("../follower/glazing_trail", ceiling.get_rot())
+	emit_rotated_particle(glazing_trail_particle, ceiling.get_rot())
 	get_node("wiggling_anim").play("wiggling")
 	
 func emit_rotated_particle(nodePath, angle):
