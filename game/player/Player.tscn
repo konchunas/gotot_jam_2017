@@ -42,6 +42,7 @@ modulate = Color( 0.153809, 0.492188, 0.365295, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="circle"]
 
+visibility/visible = false
 transform/pos = Vector2( -4.14923, 0.866432 )
 anchor_mode = 1
 rotating = false
