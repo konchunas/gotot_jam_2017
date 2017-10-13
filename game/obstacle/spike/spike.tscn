@@ -10,6 +10,7 @@ points = Vector2Array( 0, -10, 8.66025, 5, -8.66025, 5 )
 
 [node name="obstacle" type="StaticBody2D"]
 
+editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.468409, 0, 0, 2.295, -0.229125, 4.53318 )
