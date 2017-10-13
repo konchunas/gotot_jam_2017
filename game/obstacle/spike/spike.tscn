@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 points = Vector2Array( 0, -10, 8.66025, 5, -8.66025, 5 )
 
-[node name="obstacle" type="StaticBody2D"]
+[node name="spike" type="StaticBody2D"]
 
 editor/display_folded = true
 input/pickable = false

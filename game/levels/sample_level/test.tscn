@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://floor/floor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ceiling/ceiling.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/sample_level/bg1.png" type="Texture" id=5]
 
 [node name="Level" type="Node2D"]
 
@@ -84,6 +85,8 @@ transform/pos = Vector2( 191.095, -47.529 )
 
 [node name="CEILING" type="Node" parent="."]
 
+editor/display_folded = true
+
 [node name="ceiling" parent="CEILING" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 827, 33 )
@@ -111,5 +114,31 @@ transform/pos = Vector2( 2787, 1463 )
 [node name="ceiling6" parent="CEILING" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 3187, 1753 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+
+transform/pos = Vector2( 3767.06, 2655.22 )
+texture = ExtResource( 5 )
+region = true
+region_rect = Rect2( 0, 0, 8000, 8000 )
 
 
