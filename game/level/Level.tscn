@@ -4,7 +4,7 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://level/black1x1.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10.4949, 8.79216 )
@@ -13,7 +13,11 @@ extents = Vector2( 10.4949, 8.79216 )
 
 [node name="obstacle" parent="." instance=ExtResource( 1 )]
 
+transform/pos = Vector2( 152.439, 513.446 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 328, 131 )
 
 [node name="floor" type="StaticBody2D" parent="."]
 
@@ -21,7 +25,7 @@ transform/pos = Vector2( 171.674, 313.492 )
 transform/rot = -30.0
 transform/scale = Vector2( 546.917, 51.2028 )
 input/pickable = false
-shapes/0/shape = SubResource( 2 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.0476012, 0, 0, 0.0567443, 0.499682, 0.515756 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -38,7 +42,7 @@ __meta__ = {
 
 transform/pos = Vector2( 0.499682, 0.515756 )
 transform/scale = Vector2( 0.0476012, 0.0567443 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
