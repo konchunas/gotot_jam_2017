@@ -30,6 +30,10 @@ func _die():
 	set_pos(initial_pos)
 
 func _on_body_enter( body ):
+
+	if body.has_method("on_player_collide"):
+		body.on_player_collide(self)
+
 	if Input.is_action_pressed("ui_select"):
 		if body.is_in_group("ceiling"):
 			previousLinearVelocity = get_linear_velocity()
@@ -37,10 +41,5 @@ func _on_body_enter( body ):
 			previousAngularVelocity = get_angular_velocity()
 			set_angular_velocity(0)
 			set_gravity_scale(0.0)
-		elif body.is_in_group("floor"):
+		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -700))
-
-	
-
-	if body.has_method("on_player_collide"):
-		body.on_player_collide(self)
