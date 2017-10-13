@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
@@ -7,7 +7,12 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10.4949, 8.79216 )
+extents = Vector2( 13.0889, 8.79216 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12.825, 8.79216 )
 
 [node name="Level" type="Node2D"]
 
@@ -18,6 +23,7 @@ transform/pos = Vector2( -579.903, 1095.64 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 247.91, 222.817 )
+gravity_scale = 20.0
 velocity/linear = Vector2( 300, 50 )
 
 [node name="floor" type="StaticBody2D" parent="." groups=[
@@ -47,6 +53,78 @@ trigger = false
 _update_shape_index = 0
 
 [node name="floor 2" type="Sprite" parent="floor"]
+
+transform/pos = Vector2( -35.2071, -14.1874 )
+transform/scale = Vector2( 252.832, 25.0036 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="floor1" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+
+transform/pos = Vector2( 2077.53, 1685.13 )
+transform/rot = 90.0
+transform/scale = Vector2( 6.3365, 2.04782 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 9.39714, 0, 0, 1.41881, 92.8694, -1.2916 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="rectCollision" type="CollisionShape2D" parent="floor1"]
+
+transform/pos = Vector2( 92.8694, -1.2916 )
+transform/scale = Vector2( 9.39714, 1.41881 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="floor 2" type="Sprite" parent="floor1"]
+
+transform/pos = Vector2( -35.2071, -14.1874 )
+transform/scale = Vector2( 252.832, 25.0036 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="floor2" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+
+transform/pos = Vector2( 741.764, 1673.74 )
+transform/rot = 15.0
+transform/scale = Vector2( 6.3365, 2.04782 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 9.39714, 0, 0, 1.41881, 92.8694, -1.2916 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="rectCollision" type="CollisionShape2D" parent="floor2"]
+
+transform/pos = Vector2( 92.8694, -1.2916 )
+transform/scale = Vector2( 9.39714, 1.41881 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="floor 2" type="Sprite" parent="floor2"]
 
 transform/pos = Vector2( -35.2071, -14.1874 )
 transform/scale = Vector2( 252.832, 25.0036 )

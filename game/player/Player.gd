@@ -44,4 +44,4 @@ func _on_body_enter( body ):
 
 			set_gravity_scale(0.0)
 		else:
-			apply_impulse(Vector2(0,0), Vector2(0, -700))
+			apply_impulse(Vector2(0,0), Vector2(0, -70 * get_gravity_scale() ))
