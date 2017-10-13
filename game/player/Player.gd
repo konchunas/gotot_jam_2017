@@ -10,6 +10,7 @@ var previousLinearVelocity = Vector2()
 var previousAngularVelocity = 0.0
 export var jump_power = 70
 export var sliding_power = 200
+var last_collide_time = 0
 
 var glazing_trail_particle = "../follower/glazing_trail"
 
@@ -39,7 +40,11 @@ func _die():
 	set_pos(initial_pos)
 
 func _on_body_enter( body ):
-	get_node("sound").play("collision_with_floor")
+	
+	if OS.get_ticks_msec() - last_collide_time > 400:
+		get_node("sound").play("collision_with_floor")
+	
+	last_collide_time = OS.get_ticks_msec()
 	
 	if body.has_method("on_player_collide"):
 		body.on_player_collide(self)
@@ -62,6 +67,8 @@ func _on_body_enter( body ):
 			on_hit_ceiling(body)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
+			
+	
 
 func on_hit_ceiling(ceiling):
 	var bump_particles = get_node("../follower/ceil_bump_particles")
