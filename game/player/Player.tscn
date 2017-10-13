@@ -3,8 +3,6 @@
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/circle.png" type="Texture" id=2]
 
-
-
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -41,9 +39,6 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 4.14923, -0.866432 )
 texture = ExtResource( 2 )
 modulate = Color( 0.153809, 0.492188, 0.365295, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -52,9 +47,6 @@ transform/scale = Vector2( 5.9302, 6.00575 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [connection signal="body_enter" from="." to="." method="_on_body_enter"]
 
