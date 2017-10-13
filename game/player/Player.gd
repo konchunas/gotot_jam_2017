@@ -33,7 +33,8 @@ func _die():
 	set_pos(initial_pos)
 
 func _on_body_enter( body ):
-
+	get_node("sound").play("collision_with_floor")
+	
 	if body.has_method("on_player_collide"):
 		body.on_player_collide(self)
 

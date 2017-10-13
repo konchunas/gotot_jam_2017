@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
 [ext_resource path="res://player/Wiggling.tres" type="Animation" id=3]
-[ext_resource path="res://player/Follower.gd" type="Script" id=4]
-[ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=5]
-[ext_resource path="res://player/black1x1.png" type="Texture" id=6]
+[ext_resource path="res://player/samplelibrary.tres" type="SampleLibrary" id=4]
+[ext_resource path="res://player/Follower.gd" type="Script" id=5]
+[ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=6]
+[ext_resource path="res://player/black1x1.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -39,6 +40,7 @@ damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 jump_power = 100
+sliding_power = 200
 
 [node name="circle" type="Sprite" parent="Player"]
 
@@ -84,16 +86,27 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="sound" type="SamplePlayer2D" parent="Player"]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = ExtResource( 4 )
+config/pitch_random = 0.0
+
 [node name="follower" type="Node2D" parent="."]
 
 transform/pos = Vector2( 0.210762, 0 )
 transform/scale = Vector2( 0.578475, 0.571769 )
-script/script = ExtResource( 4 )
+script/script = ExtResource( 5 )
 target_path = NodePath("../Player")
 
 [node name="face" type="Sprite" parent="follower"]
 
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="ceil_bump_particles" type="Particles2D" parent="follower"]
 
@@ -105,7 +118,7 @@ config/emit_timeout = 0.5
 config/emitting = false
 config/process_mode = 1
 config/explosiveness = 0.1
-config/texture = ExtResource( 6 )
+config/texture = ExtResource( 7 )
 params/direction = 0.0
 params/spread = 96.54
 params/linear_velocity = 30.0
@@ -135,7 +148,7 @@ config/lifetime = 2.0
 config/emit_timeout = 2.0
 config/emitting = false
 config/process_mode = 1
-config/texture = ExtResource( 6 )
+config/texture = ExtResource( 7 )
 params/direction = 270.0
 params/spread = 10.0
 params/linear_velocity = 20.0
