@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obstacle/spike/moving_spike.gd" type="Script" id=2]
+
+[node name="spike" instance=ExtResource( 1 )]
+
+editor/display_folded = false
+script/script = ExtResource( 2 )
+motion = Vector2( 0, 0 )
+cycle = 1.0
+
+
