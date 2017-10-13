@@ -9,6 +9,8 @@ var initial_pos = Vector2()
 var previousLinearVelocity = Vector2()
 var previousAngularVelocity = 0.0;
 
+export(NodePath) var bump_particles_path
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
@@ -43,5 +45,13 @@ func _on_body_enter( body ):
 			set_angular_velocity(0)
 
 			set_gravity_scale(0.0)
+			on_hit_ceiling()
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -70 * get_gravity_scale() ))
+
+func on_hit_ceiling():
+	# get_node("bump_particles").set_hidden(false)
+	if bump_particles_path:
+		var bump_particles = get_node(bump_particles_path)
+		bump_particles.set_rot(0)
+		bump_particles.set_emitting(true)

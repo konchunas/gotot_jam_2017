@@ -21,7 +21,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.25
-gravity_scale = 5.0
+gravity_scale = 13.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 3
@@ -33,6 +33,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
+bump_particles_path = null
 
 [node name="circle" type="Sprite" parent="."]
 
