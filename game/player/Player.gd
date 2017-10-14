@@ -30,7 +30,6 @@ func _integrate_forces( state ):
 		var i = 0
 		while i < state.get_contact_count():  #this check is needed or it will throw errors 			
 			var angle = face.get_angle_to(state.get_contact_local_pos(i))
-			print(angle)
 			if angle > 1.5 : 
 				should_stick = true
 			i += 1
@@ -84,6 +83,7 @@ func _on_body_enter( body ):
 	
 	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
+		play_wiggle_anim()
 	
 	last_collide_time = OS.get_ticks_msec()
 	
@@ -113,13 +113,14 @@ func _on_body_enter( body ):
 	
 
 func on_hit_ceiling(ceiling):
-	var bump_particles = get_node("../follower/ceil_bump_particles")
-	bump_particles.set_rot(ceiling.get_rot())
-	bump_particles.set_emitting(true)
+	emit_rotated_particle("../follower/ceil_bump_particles", ceiling.get_rot())
 	emit_rotated_particle(glazing_trail_particle, ceiling.get_rot())
-	get_node("wiggling_anim").play("wiggling")
+	play_wiggle_anim()
 	
 func emit_rotated_particle(nodePath, angle):
 	var particles = get_node(nodePath)
 	particles.set_rot(angle)
 	particles.set_emitting(true)
+
+func play_wiggle_anim():
+	get_node("wiggling_anim").play("wiggling")
