@@ -66,24 +66,22 @@ func _input(event):
 			set_gravity_scale(initial_gravity_scale)
 			set_linear_velocity(previousLinearVelocity)
 			set_angular_velocity(previousAngularVelocity)
+			set_linear_damp(0.0)
 			get_node(glazing_trail_particle).set_emitting(false)
 
 func death_by_lazer():
 	_die()
 
 func _die():
-	set_linear_velocity(Vector2(0, 0))
-	set_angular_velocity(0)
-	set_pos(initial_pos)
-	idle_time = 0
-	last_collide_time = 0
-	print("die")
+	if not get_node("death_animations").is_playing():
+		get_node("death_animations").play("imploding")
 
 func _on_body_enter( body ):
 	
 	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
 		play_wiggle_anim()
+	
 	
 	last_collide_time = OS.get_ticks_msec()
 	
@@ -102,14 +100,11 @@ func _on_body_enter( body ):
 			slidingImpulse = slidingImpulse.rotated(body.get_rot())
 			apply_impulse(Vector2(0,0), slidingImpulse)
 			set_linear_damp(0.9)
-			
 
 			set_gravity_scale(0.0)
 			on_hit_ceiling(body)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
-	
-	
 	
 
 func on_hit_ceiling(ceiling):
@@ -123,4 +118,14 @@ func emit_rotated_particle(nodePath, angle):
 	particles.set_emitting(true)
 
 func play_wiggle_anim():
-	get_node("wiggling_anim").play("wiggling")
+	get_node("animations").play("wiggling")
+
+func _on_death_animations_finished():
+	set_linear_velocity(Vector2(0, 0))
+	set_angular_velocity(0)
+	set_pos(initial_pos)
+	get_node("../follower").set_scale(Vector2(1,1))
+	get_node("circle").set_scale(Vector2(1,1))
+	idle_time = 0
+	last_collide_time = 0
+	pass # replace with function body

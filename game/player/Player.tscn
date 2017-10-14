@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
@@ -13,6 +13,33 @@
 custom_solver_bias = 0.0
 radius = 131.979
 
+[sub_resource type="Animation" id=3]
+
+resource/name = "imploding"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("circle:transform/scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5, 1 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 0.2, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../follower:transform/scale")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.5, 1 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 0.2, 0.2 ) ]
+}
+
 [sub_resource type="OccluderPolygon2D" id=2]
 
 closed = true
@@ -23,7 +50,6 @@ polygon = Vector2Array( 0.0568161, -132.655, 50.5969, -121.825, 100.436, -95.957
 
 [node name="Player" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -34,7 +60,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.25
-gravity_scale = 13.0
+gravity_scale = 25.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 3
@@ -80,12 +106,23 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="wiggling_anim" type="AnimationPlayer" parent="Player"]
+[node name="animations" type="AnimationPlayer" parent="Player"]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/wiggling = ExtResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="death_animations" type="AnimationPlayer" parent="Player"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/imploding = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -104,7 +141,6 @@ config/pitch_random = 0.0
 
 [node name="follower" type="Node2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 0.210762, 0 )
 script/script = ExtResource( 5 )
 target_path = NodePath("../Player")
@@ -183,7 +219,7 @@ params/anim_speed_scale = 0.0
 params/anim_initial_pos = 0.0
 randomness/linear_velocity = -2.23517e-08
 randomness/initial_angle = 1.0
-color/color = Color( 0.360784, 0.2, 0.0901961, 1 )
+color/color = Color( 1, 0.981842, 0.863281, 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="follower"]
 
@@ -191,5 +227,7 @@ occluder = SubResource( 2 )
 light_mask = 1
 
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]
+
+[connection signal="finished" from="Player/death_animations" to="Player" method="_on_death_animations_finished"]
 
 
