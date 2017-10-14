@@ -58,10 +58,17 @@ shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 0
+<<<<<<< HEAD
 mass = 999.0
 friction = 1.0
 bounce = 0.25
 gravity_scale = 20.0
+=======
+mass = 2.0
+friction = 0.25
+bounce = 0.0
+gravity_scale = 30.0
+>>>>>>> 55d05422259cac0a25bcbeecde0daf93c8c7c164
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 3
@@ -73,8 +80,11 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
+<<<<<<< HEAD
 jump_power = 100000
 sliding_power = 999998
+=======
+>>>>>>> 55d05422259cac0a25bcbeecde0daf93c8c7c164
 
 [node name="circle" type="Sprite" parent="Player"]
 
