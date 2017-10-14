@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://tilemap/bg_main_upper.png" type="Texture" id=1]
+[ext_resource path="res://tilemap/bg_main_right.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 8.25806, -9.07692, 8.25806, 10.6154, -8.25806, 10.6154, -8.25806, -9.07692 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 8.25806, -9.07692, 8.25806, 10.6154, -8.25806, 10.6154, -8.25806, -9.07692 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="upper" type="Sprite" parent="."]
+
+transform/pos = Vector2( 8, 0 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="upper"]
+
+transform/pos = Vector2( -640, -190 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 31, 0, 0, 13, 640, 180 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="upper/StaticBody2D"]
+
+transform/pos = Vector2( 640, 180 )
+transform/scale = Vector2( 31, 13 )
+build_mode = 0
+polygon = Vector2Array( -8.25806, -9.07692, -8.25806, 10.6154, 8.25806, 10.6154, 8.25806, -9.07692 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="rightg" type="Sprite" parent="."]
+
+transform/pos = Vector2( 520, 0 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D1" type="StaticBody2D" parent="rightg"]
+
+transform/pos = Vector2( -632, -190 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 31, 0, 0, 13, 640, 180 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="rightg/StaticBody2D1"]
+
+transform/pos = Vector2( 640, 180 )
+transform/scale = Vector2( 31, 13 )
+build_mode = 0
+polygon = Vector2Array( -8.25806, -9.07692, -8.25806, 10.6154, 8.25806, 10.6154, 8.25806, -9.07692 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+
