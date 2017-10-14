@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=6]
 [ext_resource path="res://player/donut-closed mouth.png" type="Texture" id=7]
 [ext_resource path="res://player/particle.png" type="Texture" id=8]
+[ext_resource path="res://levels/SOUNDTRACK.ogg" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -235,11 +236,11 @@ light_mask = 1
 
 [node name="StreamPlayer" type="StreamPlayer" parent="."]
 
-stream/stream = null
-stream/play = false
-stream/loop = false
+stream/stream = ExtResource( 9 )
+stream/play = true
+stream/loop = true
 stream/volume_db = 0.0
-stream/autoplay = false
+stream/autoplay = true
 stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
