@@ -13,7 +13,6 @@ export var sliding_power = 200
 var last_collide_time = 0
 var idle_time = 0
 var prev_pos = Vector2()
-# var local_collision_pos = Vector2()
 var should_stick = false
 
 var glazing_trail_particle = "../follower/glazing_trail"
@@ -96,9 +95,9 @@ func _on_body_enter( body ):
 			set_angular_velocity(0)
 
 			var slidingImpulse = Vector2()
-			slidingImpulse.x = sliding_power
+			slidingImpulse.x = sqrt( previousLinearVelocity.x * previousLinearVelocity.x + previousLinearVelocity.y * previousLinearVelocity.y )
 			slidingImpulse = slidingImpulse.rotated(body.get_rot())
-			apply_impulse(Vector2(0,0), slidingImpulse)
+			set_linear_velocity(slidingImpulse)
 			set_linear_damp(0.9)
 
 			set_gravity_scale(0.0)
