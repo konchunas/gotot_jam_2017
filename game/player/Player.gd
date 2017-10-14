@@ -86,11 +86,8 @@ func death_by_lazer():
 	_die()
 
 func _die():
-	set_linear_velocity(Vector2(0, 0))
-	set_angular_velocity(0)
-	set_pos(initial_pos)
-	idle_time = 0
-	last_collide_time = 0
+	if not get_node("death_animations").is_playing():
+		get_node("death_animations").play("imploding")	
 	print("die")
 
 func _on_body_enter( body ):
