@@ -13,3 +13,8 @@ func _ready():
 func _on_Button_pressed():
 	get_tree().change_scene("res://levels/tilemap_level/tilemap_level.tscn")
 	pass # replace with function body
+
+
+func _on_AnimationPlayer_finished():
+	get_tree().change_scene("res://levels/tilemap_level/tilemap_level.tscn")
+	pass # replace with function body
