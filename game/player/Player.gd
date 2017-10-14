@@ -1,20 +1,22 @@
 extends RigidBody2D
 
-const GRAVITY = 200.0
-const WALK_SPEED = 200
-
-var velocity = Vector2()
 var initial_gravity_scale
 var initial_pos = Vector2()
 var previousLinearVelocity = Vector2()
 var previousAngularVelocity = 0.0
-export var jump_power = 70
-export var sliding_power = 200
+var prev_bounce = 0.0
+export var jump_power = 150
+export var sliding_power = 30
 var last_collide_time = 0
 var idle_time = 0
 var prev_pos = Vector2()
+var is_sticking = false
+
 # var local_collision_pos = Vector2()
 var should_stick = false
+var sticked_to
+var last_touched_pos = Vector2()
+var last_stick_pos = Vector2()
 
 var glazing_trail_particle = "../follower/glazing_trail"
 
@@ -26,20 +28,36 @@ func _ready():
 
 func _integrate_forces( state ):
 	var face = get_node("../follower")
-	if not should_stick:
-		var i = 0
-		while i < state.get_contact_count():  #this check is needed or it will throw errors 			
-			var angle = face.get_angle_to(state.get_contact_local_pos(i))
-			if angle > 1.5 : 
-				should_stick = true
-			i += 1
+	#if get_pos().distance_to(last_stick_pos) < 700:
+	should_stick = false
+	var i = 0
+	while i < state.get_contact_count():  #this check is needed or it will throw errors 			
+		last_touched_pos = state.get_contact_collider_pos(i)
+		var angle = face.get_angle_to(state.get_contact_local_pos(i))
+		if angle > 1.5 : 
+			should_stick = true
+			sticked_to = state.get_contact_collider_object(i)
+			last_stick_pos = state.get_contact_collider_pos(i)
+		i += 1
+		
+	print(state.get_contact_count(), " ", should_stick)	
 
 
 func _fixed_process(delta):
 	
-	if not Input.is_action_pressed("ui_select"):
-		should_stick = false
-	
+	# release from sticking
+	if not Input.is_action_pressed("ui_select") or not should_stick:
+		if get_gravity_scale() == 0.0: # if we were touching ceiling and released space than continue moving
+			print("UNSTICK")
+			is_sticking = false
+			set_gravity_scale(initial_gravity_scale)
+			set_bounce(prev_bounce)
+			set_linear_velocity(previousLinearVelocity)
+			set_angular_velocity(previousAngularVelocity)
+			set_linear_damp(-1)
+			get_node(glazing_trail_particle).set_emitting(false)
+
+
 	var v = get_linear_velocity()
 	var pos_diff = (prev_pos - get_pos()).abs()
 	
@@ -49,24 +67,21 @@ func _fixed_process(delta):
 		idle_time = 0
 	
 	# idle death after 1 sec
-	if idle_time > 1:
-		_die()
-		print("idle die")	
-		# falling death
-	if (last_collide_time > 0 and OS.get_ticks_msec() - last_collide_time > 1000 and v.y > 2000 and abs(v.y) > abs(v.x)*2.0):
+#	if idle_time > 1:
+#		_die()
+#		print("idle die")	
+#		# falling death
+	
+	if (last_collide_time > 0 and OS.get_ticks_msec() - last_collide_time > 2000 and v.y > 4000 and abs(v.y) > abs(v.x)*2.0):
 		_die()
 		print("falling die ", v.y)
 		
 	prev_pos = get_pos()
-	pass
-		 
+
 func _input(event):
-	if event.is_action_released("ui_select"):
-		if get_gravity_scale() == 0.0:		# if we were touching ceiling and released space than continue moving
-			set_gravity_scale(initial_gravity_scale)
-			set_linear_velocity(previousLinearVelocity)
-			set_angular_velocity(previousAngularVelocity)
-			get_node(glazing_trail_particle).set_emitting(false)
+	#print(get_pos().distance_to(last_touched_pos))
+	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
+		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
 
 func death_by_lazer():
 	_die()
@@ -90,26 +105,25 @@ func _on_body_enter( body ):
 	if body.has_method("on_player_collide"):
 		body.on_player_collide(self)
 
-	if Input.is_action_pressed("ui_select"):
-		if body.is_in_group("ceiling") or should_stick:
-			previousLinearVelocity = get_linear_velocity()
-			previousAngularVelocity = get_angular_velocity()
-			set_linear_velocity(Vector2(0, 0))
-			set_angular_velocity(0)
+	if should_stick:
+		on_hit_ceiling(body)
 
-			var slidingImpulse = Vector2()
-			slidingImpulse.x = sliding_power
-			slidingImpulse = slidingImpulse.rotated(body.get_rot())
-			apply_impulse(Vector2(0,0), slidingImpulse)
-			set_linear_damp(0.9)
-			
+	if Input.is_action_pressed("ui_select") and should_stick:
+		print("stick")
+		is_sticking = true
+		previousLinearVelocity = get_linear_velocity()
+		previousAngularVelocity = get_angular_velocity()
+		prev_bounce = get_bounce();
+		set_linear_velocity(Vector2(0, 0))
+		set_angular_velocity(0)
+		set_bounce(0.0)
+		set_gravity_scale(0.0)
 
-			set_gravity_scale(0.0)
-			on_hit_ceiling(body)
-		else:
-			apply_impulse(Vector2(0,0), Vector2(0, -jump_power * get_gravity_scale() ))
-	
-	
+		var slidingImpulse = Vector2()
+		slidingImpulse.x = sliding_power * get_weight()
+		#slidingImpulse = slidingImpulse.rotated(sticked_to.get_rot())
+		apply_impulse(Vector2(0,0), slidingImpulse)
+		set_linear_damp(0.9)	
 	
 
 func on_hit_ceiling(ceiling):
