@@ -136,8 +136,8 @@ func emit_rotated_particle(nodePath, angle):
 	particles.set_emitting(true)
 
 func play_wiggle_anim():
-	get_node("wiggling_anim").play("wiggling")
-	
+	get_node("animations").play("wiggling")
+
 
 func _on_death_animations_finished():
 	set_linear_velocity(Vector2(0, 0))
