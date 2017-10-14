@@ -46,6 +46,7 @@ func _fixed_process(delta):
 	if not Input.is_action_pressed("ui_select") or not should_stick:
 		if get_gravity_scale() == 0.0: # if we were touching ceiling and released space than continue moving
 			print("UNSTICK")
+			get_node("sound").stop_all()
 			is_sticking = false
 			set_gravity_scale(initial_gravity_scale)
 			set_bounce(prev_bounce)
@@ -69,7 +70,7 @@ func _fixed_process(delta):
 #		print("idle die")	
 #		# falling death
 	
-	if (last_collide_time > 0 and OS.get_ticks_msec() - last_collide_time > 2000 and v.y > 4000 and abs(v.y) > abs(v.x)*2.0):
+	if (OS.get_ticks_msec() - last_collide_time > 3000 and v.y > 4000 and abs(v.y) > abs(v.x)*2.0):
 		_die()
 		print("falling die ", v.y)
 		
@@ -84,8 +85,11 @@ func death_by_lazer():
 	_die()
 
 func _die():
+	
 	if not get_node("death_animations").is_playing():
-		get_node("death_animations").play("imploding")	
+		get_node("sound").play("death_on_spikes")
+		get_node("death_animations").play("imploding")
+	
 	print("die")
 
 func switch_to_jump_face(is_floor):
@@ -110,6 +114,7 @@ func _on_body_enter( body ):
 	if Input.is_action_pressed("ui_select") and should_stick:
 		print("stick")
 		is_sticking = true
+		get_node("sound").play("friction")
 		previousLinearVelocity = get_linear_velocity()
 		previousAngularVelocity = get_angular_velocity()
 		prev_bounce = get_bounce();
