@@ -233,6 +233,17 @@ color/color = Color( 1, 0.981842, 0.863281, 1 )
 occluder = SubResource( 3 )
 light_mask = 1
 
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = null
+stream/play = false
+stream/loop = false
+stream/volume_db = 0.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]
 
 [connection signal="finished" from="Player/death_animations" to="Player" method="_on_death_animations_finished"]
