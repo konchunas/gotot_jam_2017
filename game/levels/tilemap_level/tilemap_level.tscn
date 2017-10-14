@@ -91,7 +91,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 1, 0, 2, 0, 3, 0, 6, 0, 7, 0, 8, 0, 9, 0, 65537, 0, 65538, 0, 65539, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 0 )
+tile_data = IntArray( 1, 2, 2, 6, 3, 3, 4, 7 )
 
 [node name="moving_spike" parent="TileMap" instance=ExtResource( 5 )]
 
