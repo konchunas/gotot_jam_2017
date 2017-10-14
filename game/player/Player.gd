@@ -38,8 +38,6 @@ func _integrate_forces( state ):
 			sticked_to = state.get_contact_collider_object(i)
 			last_stick_pos = state.get_contact_collider_pos(i)
 		i += 1
-		
-	print(state.get_contact_count(), " ", should_stick)	
 
 
 func _fixed_process(delta):
@@ -48,6 +46,7 @@ func _fixed_process(delta):
 	if not Input.is_action_pressed("ui_select") or not should_stick:
 		if get_gravity_scale() == 0.0: # if we were touching ceiling and released space than continue moving
 			print("UNSTICK")
+			get_node("sound").stop_all()
 			is_sticking = false
 			set_gravity_scale(initial_gravity_scale)
 			set_bounce(prev_bounce)
@@ -71,7 +70,7 @@ func _fixed_process(delta):
 #		print("idle die")	
 #		# falling death
 	
-	if (last_collide_time > 0 and OS.get_ticks_msec() - last_collide_time > 2000 and v.y > 4000 and abs(v.y) > abs(v.x)*2.0):
+	if (OS.get_ticks_msec() - last_collide_time > 3000 and v.y > 4000 and abs(v.y) > abs(v.x)*2.0):
 		_die()
 		print("falling die ", v.y)
 		
@@ -81,20 +80,28 @@ func _input(event):
 	#print(get_pos().distance_to(last_touched_pos))
 	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
 		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
-
+		switch_to_jump_face(true)
 func death_by_lazer():
 	_die()
 
 func _die():
+	
 	if not get_node("death_animations").is_playing():
-		get_node("death_animations").play("imploding")	
+		get_node("sound").play("death_on_spikes")
+		get_node("death_animations").play("imploding")
+	
 	print("die")
+
+func switch_to_jump_face(is_floor):
+	get_node("../follower/idle_face").set_hidden(is_floor)
+	get_node("../follower/jumping_face").set_hidden(!is_floor)
 
 func _on_body_enter( body ):
 	
 	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
 		play_wiggle_anim()
+		switch_to_jump_face(false)
 	
 	last_collide_time = OS.get_ticks_msec()
 	
@@ -107,6 +114,7 @@ func _on_body_enter( body ):
 	if Input.is_action_pressed("ui_select") and should_stick:
 		print("stick")
 		is_sticking = true
+		get_node("sound").play("friction")
 		previousLinearVelocity = get_linear_velocity()
 		previousAngularVelocity = get_angular_velocity()
 		prev_bounce = get_bounce();
