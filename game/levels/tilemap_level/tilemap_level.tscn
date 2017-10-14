@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/black1x1.png" type="Texture" id=2]
 [ext_resource path="res://levels/sample_level/bg1.png" type="Texture" id=3]
 [ext_resource path="res://tilemap/tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://obstacle/spike/moving_spike.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-transform/pos = Vector2( 73.8849, -136.872 )
+transform/pos = Vector2( -806.397, -526.041 )
 
 [node name="bump_particles" type="Particles2D" parent="."]
 
@@ -40,10 +41,12 @@ params/anim_speed_scale = 0.0
 params/anim_initial_pos = 0.0
 randomness/linear_velocity = -2.23517e-08
 color/color = Color( 1, 0.175781, 0.639404, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -57,7 +60,6 @@ scroll/ignore_camera_zoom = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-editor/display_folded = true
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 0 )
@@ -67,10 +69,13 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
-transform/pos = Vector2( 3767.06, 2655.22 )
+transform/pos = Vector2( 36570.8, 35048.8 )
 texture = ExtResource( 3 )
 region = true
-region_rect = Rect2( 0, 0, 8000, 8000 )
+region_rect = Rect2( 0, 0, 80000, 80000 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 
@@ -94,4 +99,9 @@ tile_data = IntArray( -5767042, 14, -982895, 14, -917359, 14, -851823, 14, -7862
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="moving_spike" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 968.31, 222.898 )
+
 
