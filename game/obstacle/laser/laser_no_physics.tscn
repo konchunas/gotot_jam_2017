@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://obstacle/laser/laser.gd" type="Script" id=1]
+[ext_resource path="res://obstacle/laser/LazerPhysicalBody.gd" type="Script" id=2]
+[ext_resource path="res://obstacle/laser/laser.png" type="Texture" id=3]
+[ext_resource path="res://obstacle/laser/laser_anim.tres" type="Animation" id=4]
+[ext_resource path="res://obstacle/laser/LazerTimer.gd" type="Script" id=5]
+
+[node name="Laser" type="Node2D"]
+
+transform/scale = Vector2( 200, 1 )
+script/script = ExtResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+transform/pos = Vector2( -0.0182991, 0 )
+transform/rot = 180.0
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+
+transform/pos = Vector2( -0.0225626, 0.902512 )
+transform/scale = Vector2( 1, 10 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Particles2D" type="Particles2D" parent="StaticBody2D"]
+
+visibility/visible = false
+transform/pos = Vector2( -0.0340842, 31.809 )
+config/amount = 32
+config/lifetime = 2.0
+config/process_mode = 1
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 1.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/hue_variation = 1.0
+color/color = Color( 1, 0, 0, 1 )
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/shoot = ExtResource( 4 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="laser_random_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 30.0
+one_shot = false
+autostart = true
+script/script = ExtResource( 5 )
+
+[node name="laser_timeout_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="laser_random_timer" to="laser_random_timer" method="_on_timeout"]
+
+[connection signal="timeout" from="laser_timeout_timer" to="." method="stop_shooting"]
+
+

@@ -83,6 +83,18 @@ func _input(event):
 	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
 		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
 		switch_to_jump_face(true)
+	if event.is_action_pressed("ui_focus_next"):
+		shoop_da_woop(true)
+		
+func shoop_da_woop(is_shoop):
+	switch_to_jump_face(is_shoop)
+	var laser = get_node("../follower/Laser")
+	laser.set_hidden(!is_shoop)
+	if is_shoop:
+		laser.shoot()
+	else:
+		laser.stop_shooting()
+		
 func death_by_lazer():
 	_die()
 
