@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/black1x1.png" type="Texture" id=2]
 [ext_resource path="res://levels/sample_level/bg1.png" type="Texture" id=3]
-[ext_resource path="res://tilemap/tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/sample_level/spot.png" type="Texture" id=4]
+[ext_resource path="res://levels/decor_tilemap_level/diod-down.png" type="Texture" id=5]
+[ext_resource path="res://levels/decor_tilemap_level/diod-up.png" type="Texture" id=6]
+[ext_resource path="res://levels/decor_tilemap_level/chip-2.png" type="Texture" id=7]
+[ext_resource path="res://levels/decor_tilemap_level/chip-3.png" type="Texture" id=8]
+[ext_resource path="res://levels/decor_tilemap_level/microchip-back.png" type="Texture" id=9]
+[ext_resource path="res://levels/decor_tilemap_level/cables-celing.png" type="Texture" id=10]
+[ext_resource path="res://levels/decor_tilemap_level/cables.png" type="Texture" id=11]
+[ext_resource path="res://tilemap/tileset.tres" type="TileSet" id=12]
+[ext_resource path="res://obstacle/spike/spike.tscn" type="PackedScene" id=13]
 
 [node name="Level" type="Node2D"]
 
@@ -71,12 +79,302 @@ texture = ExtResource( 3 )
 region = true
 region_rect = Rect2( 0, 0, 80000, 80000 )
 
+[node name="lights" type="Node2D" parent="ParallaxBackground/ParallaxLayer"]
+
+editor/display_folded = true
+
+[node name="orange_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 613.377, -135.585 )
+transform/scale = Vector2( 30.1035, 29.7035 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.929792, 0.54667, 0.396752, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="red_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 2762.29, 331.99 )
+transform/scale = Vector2( 30.1035, 29.7035 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.921875, 0.126038, 0.29391, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 626.07, -138.913 )
+texture = ExtResource( 5 )
+modulate = Color( 0.929412, 0.545098, 0.396078, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="red_diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 2671.44, 319.713 )
+texture = ExtResource( 6 )
+modulate = Color( 0.921569, 0.12549, 0.290196, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blue_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 4121.76, 2469.54 )
+transform/scale = Vector2( 44.3047, 43.916 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.152941, 0.172549, 0.654902, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="purple_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 18859, 2587.69 )
+transform/scale = Vector2( 74.2833, 71.4571 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.521569, 0.152941, 0.654902, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="white_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 28046.6, -1565.36 )
+transform/scale = Vector2( 74.2833, 71.4571 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 2.08
+color = Color( 0.980347, 1, 0.640625, 1 )
+energy = 1.2
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blue_diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 4160.56, 2458.28 )
+texture = ExtResource( 6 )
+flip_h = true
+modulate = Color( 0.156372, 0.175899, 0.65625, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="purple_diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 18846.6, 2572.67 )
+transform/scale = Vector2( 2.22492, 3.54083 )
+texture = ExtResource( 6 )
+flip_h = true
+modulate = Color( 0.156372, 0.175899, 0.65625, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="white_diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 28014.7, -1580.38 )
+transform/scale = Vector2( 2.22492, 3.54083 )
+texture = ExtResource( 6 )
+flip_h = true
+modulate = Color( 1, 0.994507, 0.648438, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="green_light" type="Light2D" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 12666, 6272.84 )
+transform/scale = Vector2( 69.2562, 58.4747 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.152941, 0.654902, 0.466667, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="green_diode" type="Sprite" parent="ParallaxBackground/ParallaxLayer/lights"]
+
+transform/pos = Vector2( 12976, 6257.6 )
+texture = ExtResource( 6 )
+flip_h = true
+modulate = Color( 0.156372, 0.65625, 0.25791, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="decor" type="Node2D" parent="ParallaxBackground/ParallaxLayer"]
+
+editor/display_folded = true
+
+[node name="chip" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 1346.33, 1177.19 )
+texture = ExtResource( 7 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip1" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 4739.01, 1924.2 )
+texture = ExtResource( 8 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip2" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 6995.61, 3612.76 )
+texture = ExtResource( 9 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip8" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 19680.7, 1219.35 )
+texture = ExtResource( 9 )
+flip_v = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip3" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 2887.04, 1037.13 )
+texture = ExtResource( 10 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip4" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 14516.7, 7486.78 )
+texture = ExtResource( 11 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip5" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 14630.2, 7404.19 )
+transform/rot = 39.3758
+texture = ExtResource( 11 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip6" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 17691.5, 6996.36 )
+transform/rot = 199.407
+texture = ExtResource( 11 )
+flip_h = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip7" type="Sprite" parent="ParallaxBackground/ParallaxLayer/decor"]
+
+transform/pos = Vector2( 17691.5, 6996.36 )
+transform/rot = 199.407
+texture = ExtResource( 11 )
+flip_h = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
 [node name="TileMap" type="TileMap" parent="."]
 
 transform/pos = Vector2( 13.0147, 100 )
 transform/rot = -30.0
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 12 )
 cell/size = Vector2( 128, 128 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -94,27 +392,27 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="spike" parent="." instance=ExtResource( 5 )]
+[node name="spike" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 5798.5, 3356.69 )
 transform/rot = 55.0
 
-[node name="spike 2" parent="." instance=ExtResource( 5 )]
+[node name="spike 2" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 5931.43, 3344.25 )
 transform/rot = -30.0
 
-[node name="spike 3" parent="." instance=ExtResource( 5 )]
+[node name="spike 3" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 7473.28, 4314.58 )
 transform/rot = 55.0
 
-[node name="spike 4" parent="." instance=ExtResource( 5 )]
+[node name="spike 4" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 10281.6, 5822.04 )
 transform/rot = 58.0
 
-[node name="spike 5" parent="." instance=ExtResource( 5 )]
+[node name="spike 5" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 3694.56, 2209.75 )
 transform/rot = -30.0

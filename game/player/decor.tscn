@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://levels/decor_tilemap_level/chip-2.png" type="Texture" id=1]
+[ext_resource path="res://levels/decor_tilemap_level/chip-3.png" type="Texture" id=2]
+[ext_resource path="res://levels/decor_tilemap_level/microchip-back.png" type="Texture" id=3]
+[ext_resource path="res://levels/decor_tilemap_level/cables-celing.png" type="Texture" id=4]
+[ext_resource path="res://levels/decor_tilemap_level/cables.png" type="Texture" id=5]
+
+[node name="decor" type="Node2D"]
+
+editor/display_folded = true
+
+[node name="chip" type="Sprite" parent="."]
+
+transform/pos = Vector2( 1346.33, 1177.19 )
+texture = ExtResource( 1 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 4739.01, 1924.2 )
+texture = ExtResource( 2 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 6995.61, 3612.76 )
+texture = ExtResource( 3 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip8" type="Sprite" parent="."]
+
+transform/pos = Vector2( 19680.7, 1219.35 )
+texture = ExtResource( 3 )
+flip_v = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 2887.04, 1037.13 )
+texture = ExtResource( 4 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 14516.7, 7486.78 )
+texture = ExtResource( 5 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 14630.2, 7404.19 )
+transform/rot = 39.3758
+texture = ExtResource( 5 )
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 17691.5, 6996.36 )
+transform/rot = 199.407
+texture = ExtResource( 5 )
+flip_h = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+[node name="chip7" type="Sprite" parent="."]
+
+transform/pos = Vector2( 17691.5, 6996.36 )
+transform/rot = 199.407
+texture = ExtResource( 5 )
+flip_h = true
+modulate = Color( 0.77522, 0.753784, 0.964844, 1 )
+
+

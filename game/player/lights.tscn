@@ -1,0 +1,233 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://levels/sample_level/spot.png" type="Texture" id=1]
+[ext_resource path="res://levels/decor_tilemap_level/diod-down.png" type="Texture" id=2]
+[ext_resource path="res://levels/decor_tilemap_level/diod-up.png" type="Texture" id=3]
+
+[node name="lights" type="Node2D"]
+
+editor/display_folded = true
+
+[node name="orange_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 613.377, -135.585 )
+transform/scale = Vector2( 30.1035, 29.7035 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.929792, 0.54667, 0.396752, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="red_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 2762.29, 331.99 )
+transform/scale = Vector2( 30.1035, 29.7035 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.921875, 0.126038, 0.29391, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 626.07, -138.913 )
+texture = ExtResource( 2 )
+modulate = Color( 0.929412, 0.545098, 0.396078, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="red_diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 2671.44, 319.713 )
+texture = ExtResource( 3 )
+modulate = Color( 0.921569, 0.12549, 0.290196, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blue_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 4121.76, 2469.54 )
+transform/scale = Vector2( 44.3047, 43.916 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.152941, 0.172549, 0.654902, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="purple_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 18859, 2587.69 )
+transform/scale = Vector2( 74.2833, 71.4571 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.521569, 0.152941, 0.654902, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="white_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 28046.6, -1565.36 )
+transform/scale = Vector2( 74.2833, 71.4571 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 2.08
+color = Color( 0.980347, 1, 0.640625, 1 )
+energy = 1.2
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blue_diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 4160.56, 2458.28 )
+texture = ExtResource( 3 )
+flip_h = true
+modulate = Color( 0.156372, 0.175899, 0.65625, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="purple_diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 18846.6, 2572.67 )
+transform/scale = Vector2( 2.22492, 3.54083 )
+texture = ExtResource( 3 )
+flip_h = true
+modulate = Color( 0.156372, 0.175899, 0.65625, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="white_diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 28014.7, -1580.38 )
+transform/scale = Vector2( 2.22492, 3.54083 )
+texture = ExtResource( 3 )
+flip_h = true
+modulate = Color( 1, 0.994507, 0.648438, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="green_light" type="Light2D" parent="."]
+
+transform/pos = Vector2( 12666, 6272.84 )
+transform/scale = Vector2( 69.2562, 58.4747 )
+enabled = true
+editor_only = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.152941, 0.654902, 0.466667, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = -1
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = true
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="green_diode" type="Sprite" parent="."]
+
+transform/pos = Vector2( 12976, 6257.6 )
+texture = ExtResource( 3 )
+flip_h = true
+modulate = Color( 0.156372, 0.65625, 0.25791, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+

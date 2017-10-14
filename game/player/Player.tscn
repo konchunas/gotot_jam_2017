@@ -1,13 +1,19 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
 [ext_resource path="res://player/Wiggling.tres" type="Animation" id=3]
 [ext_resource path="res://player/samplelibrary.tres" type="SampleLibrary" id=4]
 [ext_resource path="res://player/Follower.gd" type="Script" id=5]
-[ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=6]
-[ext_resource path="res://player/donut-closed mouth.png" type="Texture" id=7]
-[ext_resource path="res://player/particle.png" type="Texture" id=8]
+[ext_resource path="res://obstacle/laser/laser.gd" type="Script" id=6]
+[ext_resource path="res://obstacle/laser/LazerPhysicalBody.gd" type="Script" id=7]
+[ext_resource path="res://obstacle/laser/laser.png" type="Texture" id=8]
+[ext_resource path="res://obstacle/laser/laser_anim.tres" type="Animation" id=9]
+[ext_resource path="res://obstacle/laser/LazerTimer.gd" type="Script" id=10]
+[ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=11]
+[ext_resource path="res://player/donut-closed mouth.png" type="Texture" id=12]
+[ext_resource path="res://player/particle.png" type="Texture" id=13]
+[ext_resource path="res://levels/SOUNDTRACK.ogg" type="AudioStream" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -144,17 +150,73 @@ transform/pos = Vector2( 0.210762, 0 )
 script/script = ExtResource( 5 )
 target_path = NodePath("../Player")
 
+[node name="Laser" type="Node2D" parent="follower"]
+
+visibility/visible = false
+transform/pos = Vector2( -23.3275, -41.1925 )
+transform/scale = Vector2( 200, 1 )
+script/script = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="follower/Laser"]
+
+transform/pos = Vector2( -0.0182991, 0 )
+transform/scale = Vector2( 50, 1 )
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script/script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="follower/Laser/StaticBody2D"]
+
+transform/scale = Vector2( 1, 10 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="animation" type="AnimationPlayer" parent="follower/Laser"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/shoot = ExtResource( 9 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="laser_random_timer" type="Timer" parent="follower/Laser"]
+
+process_mode = 1
+wait_time = 30.0
+one_shot = false
+autostart = true
+script/script = ExtResource( 10 )
+
+[node name="laser_timeout_timer" type="Timer" parent="follower/Laser"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
 [node name="jumping_face" type="Sprite" parent="follower"]
 
 visibility/visible = false
-texture = ExtResource( 6 )
+texture = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="idle_face" type="Sprite" parent="follower"]
 
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -170,7 +232,7 @@ config/emit_timeout = 1.0
 config/emitting = false
 config/process_mode = 1
 config/explosiveness = 0.1
-config/texture = ExtResource( 8 )
+config/texture = ExtResource( 13 )
 params/direction = 0.0
 params/spread = 100.0
 params/linear_velocity = 50.0
@@ -200,6 +262,7 @@ __meta__ = {
 
 [node name="glazing_trail" type="Particles2D" parent="follower"]
 
+visibility/visible = false
 transform/pos = Vector2( 19.6919, -124.196 )
 transform/scale = Vector2( 4, 4 )
 config/amount = 18
@@ -207,7 +270,7 @@ config/lifetime = 2.0
 config/emit_timeout = 2.0
 config/emitting = false
 config/process_mode = 1
-config/texture = ExtResource( 8 )
+config/texture = ExtResource( 13 )
 params/direction = 270.0
 params/spread = 5.0
 params/linear_velocity = 50.0
@@ -233,8 +296,23 @@ color/color = Color( 1, 0.981842, 0.863281, 1 )
 occluder = SubResource( 3 )
 light_mask = 1
 
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 14 )
+stream/play = true
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]
 
 [connection signal="finished" from="Player/death_animations" to="Player" method="_on_death_animations_finished"]
+
+[connection signal="timeout" from="follower/Laser/laser_random_timer" to="follower/Laser/laser_random_timer" method="_on_timeout"]
+
+[connection signal="timeout" from="follower/Laser/laser_timeout_timer" to="follower/Laser" method="stop_shooting"]
 
 
