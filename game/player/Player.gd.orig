@@ -6,12 +6,16 @@ var previousLinearVelocity = Vector2()
 var previousAngularVelocity = 0.0
 var prev_bounce = 0.0
 export var jump_power = 150
+export var sliding_power = 30
 var last_collide_time = 0
 var idle_time = 0
 var prev_pos = Vector2()
+<<<<<<< HEAD
 var is_sticking = false
 
 # var local_collision_pos = Vector2()
+=======
+>>>>>>> fb92364eb1f03e46f0d2d2a312de211fe9f79e0d
 var should_stick = false
 var sticked_to
 var last_touched_pos = Vector2()
@@ -78,20 +82,26 @@ func _fixed_process(delta):
 	prev_pos = get_pos()
 
 func _input(event):
+<<<<<<< HEAD
 	#print(get_pos().distance_to(last_touched_pos))
 	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
 		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
+=======
+	if event.is_action_released("ui_select"):
+		if get_gravity_scale() == 0.0:		# if we were touching ceiling and released space than continue moving
+			set_gravity_scale(initial_gravity_scale)
+			set_linear_velocity(previousLinearVelocity)
+			set_angular_velocity(previousAngularVelocity)
+			set_linear_damp(0.0)
+			get_node(glazing_trail_particle).set_emitting(false)
+>>>>>>> fb92364eb1f03e46f0d2d2a312de211fe9f79e0d
 
 func death_by_lazer():
 	_die()
 
 func _die():
-	set_linear_velocity(Vector2(0, 0))
-	set_angular_velocity(0)
-	set_pos(initial_pos)
-	idle_time = 0
-	last_collide_time = 0
-	print("die")
+	if not get_node("death_animations").is_playing():
+		get_node("death_animations").play("imploding")
 
 func _on_body_enter( body ):
 	
@@ -99,11 +109,13 @@ func _on_body_enter( body ):
 		get_node("sound").play("collision_with_floor")
 		play_wiggle_anim()
 	
+	
 	last_collide_time = OS.get_ticks_msec()
 	
 	if body.has_method("on_player_collide"):
 		body.on_player_collide(self)
 
+<<<<<<< HEAD
 	if should_stick:
 		on_hit_ceiling(body)
 
@@ -119,10 +131,29 @@ func _on_body_enter( body ):
 		set_gravity_scale(0.0)
 
 		var slidingImpulse = Vector2()
-		slidingImpulse.x = sqrt( previousLinearVelocity.x * previousLinearVelocity.x + previousLinearVelocity.y * previousLinearVelocity.y )
-		slidingImpulse = slidingImpulse.rotated(body.get_rot())
-		set_linear_velocity(slidingImpulse)
+		slidingImpulse.x = sliding_power * get_weight()
+		#slidingImpulse = slidingImpulse.rotated(sticked_to.get_rot())
+		apply_impulse(Vector2(0,0), slidingImpulse)
 		set_linear_damp(0.9)	
+=======
+	if Input.is_action_pressed("ui_select"):
+		if body.is_in_group("ceiling") or should_stick:
+			previousLinearVelocity = get_linear_velocity()
+			previousAngularVelocity = get_angular_velocity()
+			set_linear_velocity(Vector2(0, 0))
+			set_angular_velocity(0)
+
+			var slidingImpulse = Vector2()
+			slidingImpulse.x = sqrt( previousLinearVelocity.x * previousLinearVelocity.x + previousLinearVelocity.y * previousLinearVelocity.y )
+			slidingImpulse = slidingImpulse.rotated(body.get_rot())
+			set_linear_velocity(slidingImpulse)
+			set_linear_damp(0.9)
+
+			set_gravity_scale(0.0)
+			on_hit_ceiling(body)
+		else:
+			apply_impulse(Vector2(0,0), Vector2(jump_power * get_gravity_scale() * 0.5, -jump_power * get_gravity_scale() ))
+>>>>>>> fb92364eb1f03e46f0d2d2a312de211fe9f79e0d
 	
 
 func on_hit_ceiling(ceiling):
@@ -136,8 +167,7 @@ func emit_rotated_particle(nodePath, angle):
 	particles.set_emitting(true)
 
 func play_wiggle_anim():
-	get_node("wiggling_anim").play("wiggling")
-	
+	get_node("animations").play("wiggling")
 
 func _on_death_animations_finished():
 	set_linear_velocity(Vector2(0, 0))
@@ -147,4 +177,4 @@ func _on_death_animations_finished():
 	get_node("circle").set_scale(Vector2(1,1))
 	idle_time = 0
 	last_collide_time = 0
-	pass # replace with function body	
+	pass # replace with function body
