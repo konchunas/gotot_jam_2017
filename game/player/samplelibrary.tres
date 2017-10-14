@@ -1,6 +1,8 @@
-[gd_resource type="SampleLibrary" load_steps=2 format=1]
+[gd_resource type="SampleLibrary" load_steps=4 format=1]
 
 [ext_resource path="res://player/sfx1_collision_with_floor.smp" type="Sample" id=1]
+[ext_resource path="res://player/sfx3_death_on_spikes.smp" type="Sample" id=2]
+[ext_resource path="res://player/sfx2_friction.smp" type="Sample" id=3]
 
 [resource]
 
@@ -9,5 +11,17 @@ samples/collision_with_floor = {
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 1 )
+}
+samples/death_on_spikes = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/friction = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
 }
 
