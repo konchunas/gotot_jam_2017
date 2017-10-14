@@ -85,6 +85,8 @@ func _input(event):
 		switch_to_jump_face(true)
 	if event.is_action_pressed("ui_focus_next"):
 		shoop_da_woop(true)
+	if event.is_action_released("ui_focus_next"):
+		shoop_da_woop(false)
 		
 func shoop_da_woop(is_shoop):
 	switch_to_jump_face(is_shoop)
