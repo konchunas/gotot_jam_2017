@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/donut.png" type="Texture" id=2]
@@ -6,14 +6,15 @@
 [ext_resource path="res://player/samplelibrary.tres" type="SampleLibrary" id=4]
 [ext_resource path="res://player/Follower.gd" type="Script" id=5]
 [ext_resource path="res://player/shoop_da_whoop.png" type="Texture" id=6]
-[ext_resource path="res://player/particle.png" type="Texture" id=7]
+[ext_resource path="res://player/donut-closed mouth.png" type="Texture" id=7]
+[ext_resource path="res://player/particle.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 131.979
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource/name = "imploding"
 length = 1.0
@@ -40,7 +41,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 0.2, 0.2 ) ]
 }
 
-[sub_resource type="OccluderPolygon2D" id=2]
+[sub_resource type="OccluderPolygon2D" id=3]
 
 closed = true
 cull_mode = 2
@@ -57,10 +58,10 @@ shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 0
-mass = 1.0
+mass = 999.0
 friction = 1.0
 bounce = 0.25
-gravity_scale = 40.0
+gravity_scale = 20.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 3
@@ -72,8 +73,8 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-jump_power = 60
-sliding_power = 200
+jump_power = 100000
+sliding_power = 999998
 
 [node name="circle" type="Sprite" parent="Player"]
 
@@ -122,7 +123,7 @@ autoplay = ""
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/imploding = SubResource( 3 )
+anims/imploding = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -145,9 +146,17 @@ transform/pos = Vector2( 0.210762, 0 )
 script/script = ExtResource( 5 )
 target_path = NodePath("../Player")
 
-[node name="face" type="Sprite" parent="follower"]
+[node name="jumping_face" type="Sprite" parent="follower"]
 
+visibility/visible = false
 texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="idle_face" type="Sprite" parent="follower"]
+
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -163,7 +172,7 @@ config/emit_timeout = 1.0
 config/emitting = false
 config/process_mode = 1
 config/explosiveness = 0.1
-config/texture = ExtResource( 7 )
+config/texture = ExtResource( 8 )
 params/direction = 0.0
 params/spread = 100.0
 params/linear_velocity = 50.0
@@ -200,7 +209,7 @@ config/lifetime = 2.0
 config/emit_timeout = 2.0
 config/emitting = false
 config/process_mode = 1
-config/texture = ExtResource( 7 )
+config/texture = ExtResource( 8 )
 params/direction = 270.0
 params/spread = 5.0
 params/linear_velocity = 50.0
@@ -223,7 +232,7 @@ color/color = Color( 1, 0.981842, 0.863281, 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="follower"]
 
-occluder = SubResource( 2 )
+occluder = SubResource( 3 )
 light_mask = 1
 
 [connection signal="body_enter" from="Player" to="Player" method="_on_body_enter"]

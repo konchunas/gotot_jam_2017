@@ -75,12 +75,16 @@ func _die():
 	if not get_node("death_animations").is_playing():
 		get_node("death_animations").play("imploding")
 
+func switch_to_jump_face(is_floor):
+	get_node("../follower/idle_face").set_hidden(is_floor)
+	get_node("../follower/jumping_face").set_hidden(!is_floor)
+
 func _on_body_enter( body ):
 	
 	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
 		play_wiggle_anim()
-	
+		switch_to_jump_face(false)
 	
 	last_collide_time = OS.get_ticks_msec()
 	
@@ -104,6 +108,7 @@ func _on_body_enter( body ):
 			on_hit_ceiling(body)
 		else:
 			apply_impulse(Vector2(0,0), Vector2(jump_power * get_gravity_scale() * 0.5, -jump_power * get_gravity_scale() ))
+			switch_to_jump_face(true)
 	
 
 func on_hit_ceiling(ceiling):
