@@ -22,7 +22,7 @@ transform/pos = Vector2( -0.0182991, 0 )
 transform/rot = 180.0
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.498382, 34.907 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.505733, 34.907 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -40,10 +40,35 @@ centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 
-transform/pos = Vector2( 0.498382, 34.907 )
+transform/pos = Vector2( 0.505733, 34.907 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Particles2D" type="Particles2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( -0.0340842, 31.809 )
+config/amount = 32
+config/lifetime = 2.0
+config/process_mode = 1
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 1.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/hue_variation = 1.0
+color/color = Color( 1, 0, 0, 1 )
 
 [node name="animation" type="AnimationPlayer" parent="."]
 
