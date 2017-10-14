@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=1]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+
+closed = true
+cull_mode = 0
+polygon = Vector2Array( -10.367, -124.766, 60.5469, -114.794, 100.436, -95.9574, 129.245, -37.2318, 131.461, -1.77481, 122.597, 55.8427, 89.3557, 110.136, 42.8184, 124.541, -34.7437, 116.784, -90.1452, 86.8676, -122.278, 61.3829, -131.142, -10.6391, -123.386, -54.9603, -86.8211, -105.93, -48.0401, -123.658 )
+
+[node name="LightOccluder2D" type="LightOccluder2D"]
+
+occluder = SubResource( 3 )
+light_mask = 1
+
+

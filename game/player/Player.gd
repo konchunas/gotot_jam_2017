@@ -11,6 +11,8 @@ var previousAngularVelocity = 0.0
 export var jump_power = 70
 export var sliding_power = 200
 var last_collide_time = 0
+var idle_time = 0
+var prev_pos = Vector2()
 
 var glazing_trail_particle = "../follower/glazing_trail"
 
@@ -21,6 +23,24 @@ func _ready():
 	initial_pos = get_pos()
 
 func _fixed_process(delta):
+	
+	var v = get_linear_velocity()
+	var pos_diff = (prev_pos - get_pos()).abs()
+	
+	if pos_diff.x < 0.5 and pos_diff.y < 0.5:
+		idle_time += delta
+	else:
+		idle_time = 0
+	
+	# idle death after 1 sec
+	if idle_time > 1:
+		_die()
+	
+	# falling death
+	if (OS.get_ticks_msec() - last_collide_time > 2000 and v.y > 0 && abs(v.y) > abs(v.x)*2.0):
+		_die()
+		
+	prev_pos = get_pos()
 	pass
 		 
 func _input(event):
@@ -41,7 +61,7 @@ func _die():
 
 func _on_body_enter( body ):
 	
-	if OS.get_ticks_msec() - last_collide_time > 400:
+	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
 	
 	last_collide_time = OS.get_ticks_msec()
