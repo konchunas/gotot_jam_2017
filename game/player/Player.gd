@@ -38,8 +38,6 @@ func _integrate_forces( state ):
 			sticked_to = state.get_contact_collider_object(i)
 			last_stick_pos = state.get_contact_collider_pos(i)
 		i += 1
-		
-	print(state.get_contact_count(), " ", should_stick)	
 
 
 func _fixed_process(delta):
@@ -81,7 +79,7 @@ func _input(event):
 	#print(get_pos().distance_to(last_touched_pos))
 	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
 		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
-
+		switch_to_jump_face(true)
 func death_by_lazer():
 	_die()
 
@@ -99,36 +97,13 @@ func _on_body_enter( body ):
 	if last_collide_time and OS.get_ticks_msec() - last_collide_time > 400:
 		get_node("sound").play("collision_with_floor")
 		play_wiggle_anim()
-<<<<<<< HEAD
 		switch_to_jump_face(false)
-=======
->>>>>>> 55d05422259cac0a25bcbeecde0daf93c8c7c164
 	
 	last_collide_time = OS.get_ticks_msec()
 	
 	if body.has_method("on_player_collide"):
 		body.on_player_collide(self)
 
-<<<<<<< HEAD
-	if Input.is_action_pressed("ui_select"):
-		if body.is_in_group("ceiling") or should_stick:
-			previousLinearVelocity = get_linear_velocity()
-			previousAngularVelocity = get_angular_velocity()
-			set_linear_velocity(Vector2(0, 0))
-			set_angular_velocity(0)
-
-			var slidingImpulse = Vector2()
-			slidingImpulse.x = sqrt( previousLinearVelocity.x * previousLinearVelocity.x + previousLinearVelocity.y * previousLinearVelocity.y )
-			slidingImpulse = slidingImpulse.rotated(body.get_rot())
-			set_linear_velocity(slidingImpulse)
-			set_linear_damp(0.9)
-
-			set_gravity_scale(0.0)
-			on_hit_ceiling(body)
-		else:
-			apply_impulse(Vector2(0,0), Vector2(jump_power * get_gravity_scale() * 0.5, -jump_power * get_gravity_scale() ))
-			switch_to_jump_face(true)
-=======
 	if should_stick:
 		on_hit_ceiling(body)
 
@@ -148,7 +123,6 @@ func _on_body_enter( body ):
 		slidingImpulse = slidingImpulse.rotated(body.get_rot())
 		set_linear_velocity(slidingImpulse)
 		set_linear_damp(0.9)	
->>>>>>> 55d05422259cac0a25bcbeecde0daf93c8c7c164
 	
 
 func on_hit_ceiling(ceiling):
