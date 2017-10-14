@@ -16,6 +16,7 @@ var should_stick = false
 var sticked_to
 var last_touched_pos = Vector2()
 var last_stick_pos = Vector2()
+var last_stick_time = 0
 
 var glazing_trail_particle = "../follower/glazing_trail"
 
@@ -35,15 +36,16 @@ func _integrate_forces( state ):
 		var angle = face.get_angle_to(state.get_contact_local_pos(i))
 		if angle > 1.5 : 
 			should_stick = true
+			last_stick_time = OS.get_ticks_msec()
 			sticked_to = state.get_contact_collider_object(i)
 			last_stick_pos = state.get_contact_collider_pos(i)
 		i += 1
-
+	
 
 func _fixed_process(delta):
 	
 	# release from sticking
-	if not Input.is_action_pressed("ui_select") or not should_stick:
+	if not Input.is_action_pressed("ui_select") or (not should_stick and OS.get_ticks_msec() - last_stick_time > 1000):
 		if get_gravity_scale() == 0.0: # if we were touching ceiling and released space than continue moving
 			print("UNSTICK")
 			get_node("sound").stop_all()
@@ -124,6 +126,7 @@ func _on_body_enter( body ):
 		set_gravity_scale(0.0)
 
 		var slidingImpulse = Vector2()
+		slidingImpulse.y = get_weight()
 		slidingImpulse.x = sqrt( previousLinearVelocity.x * previousLinearVelocity.x + previousLinearVelocity.y * previousLinearVelocity.y )
 		slidingImpulse = slidingImpulse.rotated(body.get_rot())
 		set_linear_velocity(slidingImpulse)
