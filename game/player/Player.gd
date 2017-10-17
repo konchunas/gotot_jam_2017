@@ -45,7 +45,7 @@ func _integrate_forces( state ):
 func _fixed_process(delta):
 	
 	# release from sticking
-	if not Input.is_action_pressed("ui_select") or (not should_stick and OS.get_ticks_msec() - last_stick_time > 1000):
+	if not Input.is_action_pressed("ui_accept") or (not should_stick and OS.get_ticks_msec() - last_stick_time > 1000):
 		if get_gravity_scale() == 0.0: # if we were touching ceiling and released space than continue moving
 			print("UNSTICK")
 			get_node("sound").stop_all()
@@ -80,7 +80,7 @@ func _fixed_process(delta):
 
 func _input(event):
 	#print(get_pos().distance_to(last_touched_pos))
-	if event.is_action_pressed("ui_select") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
+	if event.is_action_pressed("ui_accept") and get_pos().distance_to(last_touched_pos) < 300 : #on ground	   
 		apply_impulse(Vector2(0,0), Vector2(1000, -jump_power*get_weight() ))
 		switch_to_jump_face(true)
 	if event.is_action_pressed("ui_focus_next"):
@@ -127,7 +127,7 @@ func _on_body_enter( body ):
 	if should_stick:
 		on_hit_ceiling(body)
 
-	if Input.is_action_pressed("ui_select") and should_stick:
+	if Input.is_action_pressed("ui_accept") and should_stick:
 		print("stick")
 		is_sticking = true
 		get_node("sound").play("friction")
